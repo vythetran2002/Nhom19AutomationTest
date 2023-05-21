@@ -2,8 +2,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import time
+from PagesObjects.GmailPage import GetOTP
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import imaplib
+import email
+import re
 
 class LoginPage():
 
@@ -23,6 +27,8 @@ class LoginPage():
     btn_continute_ID = 'identifierNext'
     txtBox_studentPasswd_Xpath = '//*[@id="password"]/div[1]/div/div[1]/input'
     btn_continue2_Xpath = '//*[@id="passwordNext"]/div/button/span'
+    txtBox_forgotEmail_XPath = '//*[@id="root"]/div/div/div[2]/form/div/input'
+    txtBox_forgotPasswdOTP_Xpath = '//*[@id="root"]/div/div/div[2]/form/div[2]/input'
 
     def __init__(self, driver):
         self.driver = driver
@@ -78,4 +84,23 @@ class LoginPage():
         self.driver.find_element(By.XPATH,self.btn_continue2_Xpath).click()
         self.driver.switch_to.window(self.driver.window_handles[0])
         time.sleep(5)
+
+    def setForgotEmail(self,email):
+        self.driver.find_element(By.XPATH, self.txtBox_forgotEmail_XPath).clear()
+        time.sleep(2)
+        self.driver.find_element(By.XPATH,self.txtBox_forgotEmail_XPath).send_keys(email)
+
+    def clickOutside(self):
+        self.driver.find_element(By.XPATH,'//*[@id="root"]/div/div').click()
+
+    def getOTP(self):
+        otpGetter = GetOTP()
+        return  otpGetter.getOTP()
+
+    def getReturnedPasswd(self):
+        newPassGetter = GetOTP()
+        return newPassGetter.getReturnedPasswd()
+    def setOTP(self,otp):
+        self.driver.find_element(By.XPATH,self.txtBox_forgotPasswdOTP_Xpath).send_keys(otp)
+
 

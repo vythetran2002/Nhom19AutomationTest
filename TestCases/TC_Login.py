@@ -33,7 +33,7 @@ class LoginTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.driver.get(cls.baseURL)
-        cls.driver.maximize_window()
+
 
     # Test Đăng Nhập: Username và password khớp với Database, Click nút "Đăng nhập"
     def test01(self):
@@ -44,14 +44,12 @@ class LoginTest(unittest.TestCase):
             time.sleep(2)  # sleep
             self.assertTrue(self.assertionText == login.getAssertText())
             login.clickLogout()
-            print('TEST1 PASSED')
+            print('Test Dang Nhap: Username va password  khop voi Database, Click nut "Dang nhap": PASSED')
 
     # Test Đăng Nhập: Username và password không khớp với Database, Click nút "Đăng nhập"
     def test02(self):
             login = LoginPage(self.driver)  # khoi tao webdriver
-            login.setEmail('')  # email trong
             login.setEmail(self.email2)  # email sai
-            login.setPasswd('')  # pass trong
             login.setPasswd(self.passwd2)  # pass sai
 
             login.clickLogin()
@@ -69,7 +67,7 @@ class LoginTest(unittest.TestCase):
             alert.accept()
 
     # login.clickLogout()
-            print('TEST2 PASSED')
+            print('Test Dang Nhap: Username va password khong khop voi Database, Click nut "Dang nhap": PASSED')
 
 
 # Test Đăng Nhập: Username để trống, Click nút "Đăng nhập"
@@ -92,7 +90,7 @@ class LoginTest(unittest.TestCase):
             alert.accept()
 
     # login.clickLogout()
-            print('TEST3 PASSED')
+            print('Test Dang Nhap: Username de trong, Click nut "Dang nhap": PASSED')
 
 
 # Test Đăng Nhập: Password để trống, Click nút "Đăng nhập"
@@ -115,10 +113,10 @@ class LoginTest(unittest.TestCase):
             alert.accept()
 
     # login.clickLogout()
-            print('TEST4 PASSED')
+            print('Test Dang Nhap: Password de trong, Click nut "Dang nhap": PASSED')
 
 
-# Test Đăng Nhập: Username và password để trống, Click nút "Đăng nhập"
+    # Test Đăng Nhập: Username và password để trống, Click nút "Đăng nhập"
     def test05(self):
             login = LoginPage(self.driver)  # khoi tao webdriver
             login.setEmail('')  # email trong
@@ -138,7 +136,7 @@ class LoginTest(unittest.TestCase):
             alert.accept()
 
     # login.clickLogout()
-            print('TEST5 PASSED')
+            print('Test Dang Nhap: Username va password de trong, Click nut "Dang nhap": PASSED')
     #Test Đăng Nhập: Username và password để trống, Click nút "Enter"
     def test06(self):
             login = LoginPage(self.driver)  # khoi tao webdriver
@@ -159,7 +157,7 @@ class LoginTest(unittest.TestCase):
             alert.accept()
 
         # login.clickLogout()
-            print('TEST6 PASSED')
+            print('Test Dang Nhap: Username va password de trong, Click nut "Enter": PASSED')
     #Test Đăng Nhập: Bằng Google tài khoản của sinh viên, Click nút "Đăng nhập"
     def test07(self):
             login = LoginPage(self.driver)
@@ -167,7 +165,7 @@ class LoginTest(unittest.TestCase):
             time.sleep(2)  # sleep
             self.assertTrue(self.assertionText == login.getAssertText())
             login.clickLogout()
-            print('TEST7 PASSED')
+            print('Test Dang Nhap: Bang Google tai khoan cua sinh vien, Click nut "Dang nhap": PASSED')
 
     #Test Đăng Nhập: Bằng Google tài khoản không phải của sinh viên, Click nút "Đăng nhập"
     def test08(self):
@@ -184,7 +182,7 @@ class LoginTest(unittest.TestCase):
 
         # Close the alert
             alert.accept()
-            print('TEST8 PASSED')
+            print('Test Dang Nhap: Bang Google tai khoan khong phai cua sinh vien, Click nut "Dang nhap": PASSED')
 
 
 
