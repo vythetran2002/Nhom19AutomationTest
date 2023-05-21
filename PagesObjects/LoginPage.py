@@ -1,5 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class LoginPage():
 
@@ -13,6 +17,12 @@ class LoginPage():
     txt_assertion_Xpath = '//*[@id="RealTimeDashBoard"]/div/div[2]/div[1]/div/p'
     Icon_Avatar_Xpath = '//*[@id="root"]/div/div[1]/div[2]/div[4]'
     btn_LogOut_Xpath = '//*[@id="root"]/div/div[1]/div[2]/div[4]/div/ul/li[2]'
+    section_container_Xpath = '//*[@id="root"]/div'
+    btn_Google_Xpath = '//*[@id="root"]/div/div/div[2]/form/div[3]/button[3]'
+    txtBox_studentEmail_ID = 'identifierId'
+    btn_continute_ID = 'identifierNext'
+    txtBox_studentPasswd_Xpath = '//*[@id="password"]/div[1]/div/div[1]/input'
+    btn_continue2_Xpath = '//*[@id="passwordNext"]/div/button/span'
 
     def __init__(self, driver):
         self.driver = driver
@@ -50,3 +60,22 @@ class LoginPage():
         actions.move_to_element(element_to_hover_over)
         actions.click(element_to_click)
         actions.perform()
+
+    def pressEnter(self):
+        self.driver.find_element(By.XPATH,self.section_container_Xpath).send_keys(Keys.ENTER)
+
+    def clickGoogle(self,email,passwd):
+        self.driver.find_element(By.XPATH,self.btn_Google_Xpath).click()
+        for window_handle in self.driver.window_handles:
+            self.driver.switch_to.window(window_handle)
+            if "Đăng nhập - Tài khoản Google" in self.driver.title:
+                break
+
+        self.driver.find_element(By.ID,self.txtBox_studentEmail_ID).send_keys(email)
+        self.driver.find_element(By.ID,self.btn_continute_ID).click()
+        time.sleep(5)
+        self.driver.find_element(By.XPATH, self.txtBox_studentPasswd_Xpath).send_keys(passwd)
+        self.driver.find_element(By.XPATH,self.btn_continue2_Xpath).click()
+        self.driver.switch_to.window(self.driver.window_handles[0])
+        time.sleep(5)
+
