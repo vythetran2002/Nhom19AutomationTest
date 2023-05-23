@@ -29,6 +29,10 @@ class LoginPage():
     btn_continue2_Xpath = '//*[@id="passwordNext"]/div/button/span'
     txtBox_forgotEmail_XPath = '//*[@id="root"]/div/div/div[2]/form/div/input'
     txtBox_forgotPasswdOTP_Xpath = '//*[@id="root"]/div/div/div[2]/form/div[2]/input'
+    txtBox_nameResgister_Xpath = '//*[@id="root"]/div/div/div[2]/form/div[1]/input'
+    txtBox_emailRegister_Xpath = '//*[@id="root"]/div/div/div[2]/form/div[2]/input'
+    txtBox_passwdRegister_Xpath = '//*[@id="root"]/div/div/div[2]/form/div[3]/input'
+    btn_register_Xpath = '//*[@id="root"]/div/div/div[2]/form/div[4]/button[2]'
 
     def __init__(self, driver):
         self.driver = driver
@@ -103,4 +107,15 @@ class LoginPage():
     def setOTP(self,otp):
         self.driver.find_element(By.XPATH,self.txtBox_forgotPasswdOTP_Xpath).send_keys(otp)
 
+    def setRegisterName(self, name):
+        self.driver.find_element(By.XPATH,self.txtBox_nameResgister_Xpath).send_keys(name)
+
+    def setRegisterEmail(self, email):
+        self.driver.find_element(By.XPATH, self.txtBox_emailRegister_Xpath).send_keys(email)
+
+    def setRegisterPasswd(self, passwd):
+        self.driver.find_element(By.XPATH, self.txtBox_passwdRegister_Xpath).send_keys(passwd)
+
+    def clickRegister(self):
+        self.driver.find_element(By.XPATH, self.btn_register_Xpath).click()
 
